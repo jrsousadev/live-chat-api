@@ -66,4 +66,11 @@ export class MessageModule {
       throw err;
     }
   };
+  deleteAllMessages = async () => {
+    try {
+      return await prismaClient.message.deleteMany({})
+    } catch (err) {
+      throw err;
+    }
+  }
 }
