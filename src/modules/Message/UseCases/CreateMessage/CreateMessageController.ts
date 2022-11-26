@@ -6,11 +6,11 @@ import { CreateMessageService } from "./CreateMessageService";
 class CreateChatController {
   async handle(request: Request, response: Response): Promise<any> {
     try {
-      const { chatId, issuer, recipient, text } = request.body;
+      const { chatId, issuer, text } = request.body;
 
       const createMessageService = container.resolve(CreateMessageService);
 
-      const message: any = await createMessageService.execute({ chatId, issuer, recipient, text });
+      const message: any = await createMessageService.execute({ chatId, issuer, text });
 
       if (message.message) throw new AppError(message.message, message.statusCode);
 

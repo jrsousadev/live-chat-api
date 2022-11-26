@@ -3,7 +3,6 @@ import { MessageModule } from "../../MessageModule";
 
 interface CreateMessageRequest {
   chatId: string;
-  recipient: string;
   issuer: string;
   text: string;
 }
@@ -15,11 +14,10 @@ export class CreateMessageService {
     private messageModule: MessageModule
   ) {}
 
-  execute = async ({ chatId, issuer, recipient, text }: CreateMessageRequest) => {
+  execute = async ({ chatId, issuer, text }: CreateMessageRequest) => {
     try {
       return await this.messageModule.create({
         chatId,
-        recipient,
         issuer,
         text
       });
