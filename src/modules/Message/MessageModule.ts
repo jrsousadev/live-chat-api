@@ -3,6 +3,7 @@ import { prismaClient } from "../../database/prismaClient";
 export interface CreateChat {
   chatId: string;
   issuer: string;
+  recipient: string;
   text: string;
 }
 

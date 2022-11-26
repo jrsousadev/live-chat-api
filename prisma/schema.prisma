@@ -42,6 +42,8 @@ model Message {
   user   User   @relation(fields: [issuer], references: [id])
   issuer String @unique @db.ObjectId
 
+  recipient String @unique @db.ObjectId
+
   text String
 
   createdAt DateTime @default(now())

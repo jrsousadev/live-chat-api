@@ -1,4 +1,4 @@
-# fly.toml file generated for live-chat-api on 2022-11-25T19:34:52-03:00
+# fly.toml file generated for live-chat-api on 2022-11-25T20:33:30-03:00
 
 app = "live-chat-api"
 kill_signal = "SIGINT"
@@ -6,7 +6,6 @@ kill_timeout = 5
 processes = []
 
 [env]
-  PORT = "8080"
 
 [experimental]
   allowed_public_ports = []

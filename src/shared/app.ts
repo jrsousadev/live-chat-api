@@ -17,7 +17,7 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://live-chat-web.vercel.app",
+    origin: "*",
   })
 );
 app.use("/api", routes);
@@ -40,7 +40,7 @@ app.use(
 const serverHttp = http.createServer(app);
 const io = new Server(serverHttp, {
   cors: {
-    origin: "https://live-chat-web.vercel.app",
+    origin: "*",
   },
 });
 
