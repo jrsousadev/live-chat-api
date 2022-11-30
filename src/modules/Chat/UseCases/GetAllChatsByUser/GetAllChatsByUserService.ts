@@ -43,10 +43,7 @@ export class GetAllChatsByUserService {
 
       return chats;
     } catch (err) {
-      return {
-        message: "Error",
-        statusCode: 400,
-      };
+      throw err;
     }
   };
 }

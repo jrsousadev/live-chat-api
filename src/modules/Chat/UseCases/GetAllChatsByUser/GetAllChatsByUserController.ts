@@ -9,14 +9,13 @@ class GetAllChatsByUserController {
       const { userId } = request.params;
 
       const getAllChatsByUserService = container.resolve(GetAllChatsByUserService);
-
-      const chats: any = await getAllChatsByUserService.execute({ userId });
-
-      if (chats.message) throw new AppError(chats.message, chats.statusCode);
+      const chats = await getAllChatsByUserService.execute({ userId });
 
       return response.status(200).json(chats);
     } catch (err: any) {
-      return response.status(err.statusCode).json(err);
+      return response.status(400).json({
+        message: "Internal error trying to read all user chats"
+      });
     }
   }
 }
