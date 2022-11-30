@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-import { AppError } from "../../../../shared/errors/AppError";
 import { CreateGroupChatService } from "./CreateGroupChatService";
 
 class CreateGroupChatController {
@@ -9,18 +8,17 @@ class CreateGroupChatController {
       const { users, groupName, groupImage } = request.body;
 
       const createGroupChatService = container.resolve(CreateGroupChatService);
-
-      const chat: any = await createGroupChatService.execute({
+      const chat = await createGroupChatService.execute({
         users,
         groupName,
         groupImage,
       });
 
-      if (chat.message) throw new AppError(chat.message, chat.statusCode);
-
       return response.status(201).json(chat);
-    } catch (err: any) {
-      return response.status(err.statusCode).json(err);
+    } catch (err) {
+      return response.status(400).json({
+        message: "Internal error when trying to create a group chat",
+      });
     }
   }
 }

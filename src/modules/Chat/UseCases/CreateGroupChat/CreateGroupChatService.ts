@@ -22,10 +22,7 @@ export class CreateGroupChatService {
         groupImage,
       });
     } catch (err) {
-      return {
-        message: "Error",
-        statusCode: 400,
-      }
+      throw err;
     }
   };
 }
