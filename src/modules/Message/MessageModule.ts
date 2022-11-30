@@ -32,6 +32,13 @@ export class MessageModule {
         where: {
           id,
         },
+        include: {
+          user: {
+            select: {
+              name: true,
+            }
+          }
+        }
       });
     } catch (err) {
       throw err;
@@ -46,6 +53,13 @@ export class MessageModule {
         where: {
           chatId,
         },
+        include: {
+          user: {
+            select: {
+              name: true,
+            }
+          }
+        }
       });
     } catch (err) {
       throw err;
@@ -56,6 +70,13 @@ export class MessageModule {
       return await prismaClient.message.findMany({
         where: {
           chatId,
+        },
+        include: {
+          user: {
+            select: {
+              name: true
+            }
+          }
         },
         orderBy: {
           createdAt: "desc",

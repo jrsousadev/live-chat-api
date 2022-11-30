@@ -20,7 +20,6 @@ export class CreateUserService {
         name,
       });
     } catch (err) {
-      console.log(err)
       return {
         message: "Error",
         statusCode: 400,

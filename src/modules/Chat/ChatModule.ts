@@ -5,6 +5,12 @@ export interface CreateChat {
   userTwo: string;
 }
 
+export interface CreateGroupChat {
+  users: string[];
+  groupName: string;
+  groupImage: string;
+}
+
 export interface ReadOneChat {
   id: string;
 }
@@ -31,6 +37,13 @@ export class ChatModule {
         where: {
           id,
         },
+        include: {
+          User: {
+            select: {
+              name: true,
+            }
+          }
+        }
       });
     } catch (err) {
       throw err;
@@ -53,4 +66,18 @@ export class ChatModule {
       throw err;
     }
   };
+  createGroup = async ({ users, groupName, groupImage }: CreateGroupChat) => {
+    try {
+      return await prismaClient.chat.create({
+        data: {
+          users,
+          groupName,
+          isGroup: true,
+          groupImage,
+        }
+      });
+    } catch (err) {
+      throw err;
+    }
+  }
 }

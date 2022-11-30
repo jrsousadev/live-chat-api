@@ -18,7 +18,8 @@ io.on("connection", (socket) => {
 
   socket.on("message", async (data, callback) => {
     const newMessage = await messageModule.create(data.message);
+    const getNewMessage = await messageModule.readOne({ id: newMessage.id });
 
-    io.to(data.message.chatId).emit("message", newMessage);
+    io.to(data.message.chatId).emit("message", getNewMessage);
   });
 });

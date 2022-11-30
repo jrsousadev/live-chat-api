@@ -27,6 +27,10 @@ model Chat {
   createdAt DateTime @default(now())
   Message   Message?
 
+  isGroup Boolean? @default(false)
+  groupName String? @default("")
+  groupImage String? @default("")
+
   User  User     @relation(name: "chatsID", fields: [users], references: [id])
   users String[] @db.ObjectId
 
