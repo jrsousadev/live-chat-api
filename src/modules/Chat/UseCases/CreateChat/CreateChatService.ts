@@ -20,10 +20,7 @@ export class CreateChatService {
         userTwo,
       });
     } catch (err) {
-      return {
-        message: "Error",
-        statusCode: 400,
-      }
+      throw err;
     }
   };
 }

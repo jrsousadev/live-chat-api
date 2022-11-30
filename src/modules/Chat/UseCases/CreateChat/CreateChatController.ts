@@ -9,14 +9,13 @@ class CreateChatController {
       const { userOne, userTwo } = request.body;
 
       const createChatService = container.resolve(CreateChatService);
-
-      const chat: any = await createChatService.execute({ userOne, userTwo });
-
-      if (chat.message) throw new AppError(chat.message, chat.statusCode);
+      const chat = await createChatService.execute({ userOne, userTwo });
 
       return response.status(201).json(chat);
-    } catch (err: any) {
-      return response.status(err.statusCode).json(err);
+    } catch (err) {
+      return response.status(400).json({
+        message: "Internal error when trying to create a chat"
+      });
     }
   }
 }
