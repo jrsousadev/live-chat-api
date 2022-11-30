@@ -1,10 +1,8 @@
 import { inject, injectable } from "tsyringe";
 import { UserModule } from "../../UserModule";
-
 interface GetUserRequest {
   id: string;
 }
-
 @injectable()
 export class GetUserService {
   constructor(
@@ -18,10 +16,7 @@ export class GetUserService {
         id,
       });
     } catch (err) {
-      return {
-        message: "Error",
-        statusCode: 400,
-      };
+      throw err;
     }
   };
 }
