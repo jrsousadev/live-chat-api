@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-import { AppError } from "../../../../shared/errors/AppError";
 import { CreateUserService } from "./CreateUserService";
 
 class CreateUserController {
@@ -9,14 +8,15 @@ class CreateUserController {
       const { name, image } = request.body;
 
       const createUserService = container.resolve(CreateUserService);
-
-      const user: any = await createUserService.execute({ name, image });
-
-      if (user.message) throw new AppError(user.message, user.statusCode);
+      const user = await createUserService.execute({ name, image });
 
       return response.status(201).json(user);
-    } catch (err: any) {
-      return response.status(err.statusCode).json(err);
+    } catch (err) {
+      return response
+        .status(400)
+        .json({
+          message: "Internal error when trying to create the user",
+        });
     }
   }
 }
