@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-import { AppError } from "../../../../shared/errors/AppError";
 import { CreateMessageService } from "./CreateMessageService";
 
 class CreateChatController {
@@ -9,14 +8,13 @@ class CreateChatController {
       const { chatId, issuer, text } = request.body;
 
       const createMessageService = container.resolve(CreateMessageService);
-
-      const message: any = await createMessageService.execute({ chatId, issuer, text });
-
-      if (message.message) throw new AppError(message.message, message.statusCode);
+      const message = await createMessageService.execute({ chatId, issuer, text });
 
       return response.status(201).json(message);
-    } catch (err: any) {
-      return response.status(err.statusCode).json(err);
+    } catch (err) {
+      return response.status(400).json({
+        message: "Internal error trying to create the message"
+      });
     }
   }
 }
