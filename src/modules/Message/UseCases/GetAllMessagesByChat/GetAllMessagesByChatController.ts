@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-import { AppError } from "../../../../shared/errors/AppError";
 import { GetAllMessagesByChatService } from "./GetAllMessagesByChatService";
 
 class GetAllMessagesByChatController {
@@ -13,14 +12,13 @@ class GetAllMessagesByChatController {
       }
 
       const getAllMessagesByChatService = container.resolve(GetAllMessagesByChatService);
-
-      const messages: any = await getAllMessagesByChatService.execute({ chatId });
-
-      if (messages.message) throw new AppError(messages.message, messages.statusCode);
+      const messages = await getAllMessagesByChatService.execute({ chatId });
 
       return response.status(200).json(messages);
-    } catch (err: any) {
-      return response.status(err.statusCode).json(err);
+    } catch (err) {
+      return response.status(400).json({
+        message: "Internal error trying to read all messages"
+      });
     }
   }
 }
