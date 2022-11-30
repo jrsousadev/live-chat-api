@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-import { AppError } from "../../../../shared/errors/AppError";
 import { GetMessageService } from "./GetMessageService";
 
 class GetMessageController {
@@ -9,14 +8,13 @@ class GetMessageController {
       const { id } = request.params;
 
       const getMessageService = container.resolve(GetMessageService);
-
-      const message: any = await getMessageService.execute({ id });
-
-      if (message.message) throw new AppError(message.message, message.statusCode);
+      const message = await getMessageService.execute({ id });
 
       return response.status(200).json(message);
-    } catch (err: any) {
-      return response.status(err.statusCode).json(err);
+    } catch (err) {
+      return response.status(400).json({
+        message: "Internal error when trying to read a message"
+      });
     }
   }
 }
