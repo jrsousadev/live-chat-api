@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-import { AppError } from "../../../../shared/errors/AppError";
 import { GetLastMessageByChatService } from "./GetLastMessageByChatService";
 
 class GetLastMessageByChatController {
@@ -12,15 +11,18 @@ class GetLastMessageByChatController {
         return response.status(200).json([]);
       }
 
-      const getLastMessageByChatService = container.resolve(GetLastMessageByChatService);
-
-      const lastMessage: any = await getLastMessageByChatService.execute({ chatId });
-
-      if (lastMessage.message) throw new AppError(lastMessage.message, lastMessage.statusCode);
+      const getLastMessageByChatService = container.resolve(
+        GetLastMessageByChatService
+      );
+      const lastMessage = await getLastMessageByChatService.execute({ chatId });
 
       return response.status(200).json(lastMessage);
-    } catch (err: any) {
-      return response.status(err.statusCode).json(err);
+    } catch (err) {
+      return response
+        .status(400)
+        .json({
+          message: "Internal error when trying to read the last chat message",
+        });
     }
   }
 }
