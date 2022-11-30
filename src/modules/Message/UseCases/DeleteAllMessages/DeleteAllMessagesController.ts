@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-import { AppError } from "../../../../shared/errors/AppError";
 import { DeleteAllMessagesService } from "./DeleteAllMessagesService";
 
 class DeleteAllMessagesController {
@@ -8,13 +7,13 @@ class DeleteAllMessagesController {
     try {
       const deleteAllMessagesService = container.resolve(DeleteAllMessagesService);
 
-      const messages: any = await deleteAllMessagesService.execute();
-
-      if (messages.message) throw new AppError(messages.message, messages.statusCode);
+      const messages = await deleteAllMessagesService.execute();
 
       return response.status(200).json(messages);
-    } catch (err: any) {
-      return response.status(err.statusCode).json(err);
+    } catch (err) {
+      return response.status(400).json({
+        message: "Internal error when trying to delete messages"
+      });
     }
   }
 }

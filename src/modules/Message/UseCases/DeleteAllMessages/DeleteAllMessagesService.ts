@@ -12,10 +12,7 @@ export class DeleteAllMessagesService {
     try {
       return await this.messageModule.deleteAllMessages();
     } catch (err) {
-      return {
-        message: "Error",
-        statusCode: 400,
-      }
+      throw err;
     }
   };
 }
