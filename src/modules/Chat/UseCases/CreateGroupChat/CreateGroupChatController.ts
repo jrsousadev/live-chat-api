@@ -1,9 +1,9 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { container } from "tsyringe";
 import { CreateGroupChatService } from "./CreateGroupChatService";
 
 class CreateGroupChatController {
-  async handle(request: Request, response: Response): Promise<any> {
+  async handle(request: Request, response: Response, next: NextFunction): Promise<any> {
     try {
       const { users, groupName, groupImage } = request.body;
 
@@ -16,9 +16,7 @@ class CreateGroupChatController {
 
       return response.status(201).json(chat);
     } catch (err) {
-      return response.status(400).json({
-        message: "Internal error when trying to create a group chat",
-      });
+      next(err)
     }
   }
 }
