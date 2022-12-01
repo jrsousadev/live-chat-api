@@ -36,13 +36,6 @@ export class ChatModule {
       return await prismaClient.chat.findFirst({
         where: {
           id,
-        },
-        include: {
-          User: {
-            select: {
-              name: true,
-            }
-          }
         }
       });
     } catch (err) {
