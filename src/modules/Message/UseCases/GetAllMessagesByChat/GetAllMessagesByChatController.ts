@@ -1,11 +1,15 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { container } from "tsyringe";
+import { AppError } from "../../../../shared/errors/AppError";
+import { validObjectId } from "../../../../utils/validObjectId";
 import { GetAllMessagesByChatService } from "./GetAllMessagesByChatService";
 
 class GetAllMessagesByChatController {
-  async handle(request: Request, response: Response): Promise<any> {
+  async handle(request: Request, response: Response, next: NextFunction): Promise<any> {
     try {
       const { chatId } = request.params;
+
+      if (!validObjectId(chatId)) throw new AppError("id invalid", 400);
 
       if (!chatId) {
         return response.status(200).json([]);
@@ -16,9 +20,7 @@ class GetAllMessagesByChatController {
 
       return response.status(200).json(messages);
     } catch (err) {
-      return response.status(400).json({
-        message: "Internal error trying to read all messages"
-      });
+      next(err)
     }
   }
 }
