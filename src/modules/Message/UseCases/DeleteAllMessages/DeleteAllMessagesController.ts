@@ -1,9 +1,9 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { container } from "tsyringe";
 import { DeleteAllMessagesService } from "./DeleteAllMessagesService";
 
 class DeleteAllMessagesController {
-  async handle(request: Request, response: Response): Promise<any> {
+  async handle(request: Request, response: Response, next: NextFunction): Promise<any> {
     try {
       const deleteAllMessagesService = container.resolve(DeleteAllMessagesService);
 
@@ -11,9 +11,7 @@ class DeleteAllMessagesController {
 
       return response.status(200).json(messages);
     } catch (err) {
-      return response.status(400).json({
-        message: "Internal error when trying to delete messages"
-      });
+      next(err)
     }
   }
 }
