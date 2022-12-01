@@ -1,20 +1,22 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { container } from "tsyringe";
+import { AppError } from "../../../../shared/errors/AppError";
+import { validObjectId } from "../../../../utils/validObjectId";
 import { GetMessageService } from "./GetMessageService";
 
 class GetMessageController {
-  async handle(request: Request, response: Response): Promise<any> {
+  async handle(request: Request, response: Response, next: NextFunction): Promise<any> {
     try {
       const { id } = request.params;
+
+      if (!validObjectId(id)) throw new AppError("id invalid", 400);
 
       const getMessageService = container.resolve(GetMessageService);
       const message = await getMessageService.execute({ id });
 
       return response.status(200).json(message);
     } catch (err) {
-      return response.status(400).json({
-        message: "Internal error when trying to read a message"
-      });
+      next(err);
     }
   }
 }

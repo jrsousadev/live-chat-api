@@ -1,9 +1,9 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { container } from "tsyringe";
 import { CreateUserService } from "./CreateUserService";
 
 class CreateUserController {
-  async handle(request: Request, response: Response): Promise<any> {
+  async handle(request: Request, response: Response, next: NextFunction): Promise<any> {
     try {
       const { name, image } = request.body;
 
@@ -12,11 +12,7 @@ class CreateUserController {
 
       return response.status(201).json(user);
     } catch (err) {
-      return response
-        .status(400)
-        .json({
-          message: "Internal error when trying to create the user",
-        });
+      next(err)
     }
   }
 }
