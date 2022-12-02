@@ -13,8 +13,6 @@ class GetAllMessagesByChatController {
     try {
       const { chatId } = request.params;
 
-      if (!validObjectId(chatId)) throw new AppError("id invalid", 400);
-
       if (!chatId) {
         return response.status(200).json([]);
       }

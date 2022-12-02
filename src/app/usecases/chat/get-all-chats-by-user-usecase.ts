@@ -1,6 +1,8 @@
 import { inject, injectable } from "tsyringe";
 import { ChatRepository } from "../../repositories/chat-repository";
 import { UserRepository } from "../../repositories/user-repository";
+import { AppError } from "../../shared/errors/AppError";
+import { validObjectId } from "../../utils/validObjectId";
 
 interface GetAllChatsByUserRequest {
   userId: string;
@@ -18,6 +20,8 @@ export class GetAllChatsByUserUseCase {
 
   execute = async ({ userId }: GetAllChatsByUserRequest) => {
     try {
+      if (!validObjectId(userId)) throw new AppError("id invalid", 400);
+
       const chats: any = await this.chatRepository.findAllByUser(userId);
 
       for (let index of chats) {

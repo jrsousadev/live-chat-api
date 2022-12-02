@@ -9,8 +9,6 @@ class GetMessageController {
     try {
       const { id } = request.params;
 
-      if (!validObjectId(id)) throw new AppError("id invalid", 400);
-
       const getMessageUseCase = container.resolve(GetMessageUseCase);
       const message = await getMessageUseCase.execute({ id });
 

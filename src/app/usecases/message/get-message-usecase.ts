@@ -1,5 +1,7 @@
 import { inject, injectable } from "tsyringe";
 import { MessageRepository } from "../../repositories/message-repository";
+import { AppError } from "../../shared/errors/AppError";
+import { validObjectId } from "../../utils/validObjectId";
 
 type getMessageRequest = {
   id: string;
@@ -9,16 +11,22 @@ type getMessageRequest = {
 export class GetMessageUseCase {
   constructor(
     @inject("MessageModule")
-    private messageRepository: MessageRepository,
+    private messageRepository: MessageRepository
   ) {}
 
   async execute({ id }: getMessageRequest) {
-    const message = await this.messageRepository.findById(id);
+    try {
+      if (!validObjectId(id)) throw new AppError("id invalid", 400);
 
-    if (!message) {
-      throw new Error("Message does not exists.");
+      const message = await this.messageRepository.findById(id);
+
+      if (!message) {
+        throw new AppError("Message does not exists.");
+      }
+
+      return message;
+    } catch (err) {
+      throw err;
     }
-    
-    return message;
   }
 }
