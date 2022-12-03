@@ -10,23 +10,24 @@ import { CreateMessageUseCase } from "./create-message-usecase";
 const JEST_ENV = process.env.JEST as string;
 
 export const createMessageFactory = () => {
-  const messageRepository =
-    JEST_ENV === "ACTIVE"
-      ? new InMemoryMessageRepository()
-      : new MessageModule();
+  const messageRepository = JEST_ENV
+    ? new InMemoryMessageRepository()
+    : new MessageModule();
 
-  const userRepository =
-    JEST_ENV === "ACTIVE" ? new InMemoryUserRepository() : new UserModule();
+  const userRepository = JEST_ENV
+    ? new InMemoryUserRepository()
+    : new UserModule();
 
-  const chatRepository =
-    JEST_ENV === "ACTIVE" ? new InMemoryChatRepository() : new ChatModule();
+  const chatRepository = JEST_ENV
+    ? new InMemoryChatRepository()
+    : new ChatModule();
 
   const createMessage = new CreateMessageUseCase(
     messageRepository,
     userRepository,
     chatRepository
   );
-  
+
   const createMessageController = new CreateMessageController(createMessage);
   return createMessageController;
 };
