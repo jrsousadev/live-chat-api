@@ -1,17 +1,15 @@
-import "reflect-metadata";
-import express, {NextFunction, Request, Response } from "express";
+import express, { NextFunction, Request, Response } from "express";
 import http from "http";
 import dotenv from "dotenv";
 import cors from "cors";
-import routes from "../shared/routes"
+import routes from "./routes";
 
 import "express-async-errors";
-import "./container"
 
 import { Server } from "socket.io";
 import { AppError } from "./errors/AppError";
 
-dotenv.config()
+dotenv.config();
 
 const app = express();
 

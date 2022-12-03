@@ -1,4 +1,5 @@
 import { Chat } from "../../domain/entities/chat";
+import { GroupChat } from "../../domain/entities/group-chat";
 
 export interface ICreateChat {
   userOne: string;
@@ -14,6 +15,6 @@ export interface ICreateGroupChat {
 export interface ChatRepository {
   findById(id: string): Promise<Chat | null>;
   create(data: ICreateChat): Promise<Chat>;
-  createGroup(data: ICreateGroupChat): Promise<Chat>;
+  createGroup(data: ICreateGroupChat): Promise<GroupChat>;
   findAllByUser(userId: string): Promise<Chat[] | null>;
 }

@@ -1,5 +1,5 @@
 import { io } from "./app";
-import { MessageModule } from "../modules/message-module";
+import { MessageModule } from "../modules/message/message-module";
 
 const messageModule = new MessageModule();
 
