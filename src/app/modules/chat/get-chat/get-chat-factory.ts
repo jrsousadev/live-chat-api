@@ -1,15 +1,16 @@
 import { ChatModule } from "../chat-module";
-import { ChatRepository } from "../../../repositories/chat-repository";
 import { GetChatUseCase } from "./get-chat-usecase";
 import { GetChatController } from "./get-chat-controller";
+import { config } from "../../../../config";
+import { InMemoryChatRepository } from "../../../../../tests/_repositories/in-memory-chat-repository";
 
-export const getChatFactory = (
-  InMemoryChatRepository?: ChatRepository
-) => {
-  const chatRepository = InMemoryChatRepository ?? new ChatModule();
+const TEST_ENVIRONMENT = config.ENVIRONMENT === "TEST" ? true : false;
+
+export const getChatFactory = () => {
+  const chatRepository = TEST_ENVIRONMENT
+    ? new InMemoryChatRepository()
+    : new ChatModule();
   const getChat = new GetChatUseCase(chatRepository);
-  const getChatController = new GetChatController(
-    getChat
-  );
+  const getChatController = new GetChatController(getChat);
   return getChatController;
 };
