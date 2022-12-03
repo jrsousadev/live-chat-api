@@ -12,7 +12,7 @@ export class GetAllChatsByUserController {
     try {
       const { userId } = request.params;
 
-      const chats = await this.getAllChatsByUser.execute({ userId });
+      const chats = await this.getAllChatsByUser.execute({ userId })
 
       return response.status(200).json(chats);
     } catch (err) {
