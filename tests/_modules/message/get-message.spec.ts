@@ -4,7 +4,7 @@ import { faker } from "@faker-js/faker";
 import request from "supertest";
 
 describe("Get Message", () => {
-  it("should create message successfully and HTTP Status 200", async () => {
+  it("should get message successfully and HTTP Status 200", async () => {
     const firstItemInList = 0;
 
     const id = fakeDBMessages[firstItemInList].id;
