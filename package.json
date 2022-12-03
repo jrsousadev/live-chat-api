@@ -9,7 +9,7 @@
     "dev": "ts-node-dev src/app/shared/server.ts",
     "build": "tsc",
     "seed": "ts-node-dev tests/_seed/index.ts",
-    "test": "jest"
+    "test": "npm run seed && jest"
   },
   "dependencies": {
     "@prisma/client": "^4.6.1",
