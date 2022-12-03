@@ -11,7 +11,7 @@ export class GetLastMessageByChatUseCase {
 
   execute = async ({ chatId }: GetLastMessagesByChatRequest) => {
     try {
-      if (!validObjectId(chatId)) throw new AppError("id invalid", 400);
+      if (!validObjectId(chatId)) throw new AppError("Invalid id", 400);
 
       return await this.messageRepository.findLastByChat(chatId);
     } catch (err) {

@@ -11,7 +11,7 @@ export class GetMessageUseCase {
 
   async execute({ id }: getMessageRequest) {
     try {
-      if (!validObjectId(id)) throw new AppError("id invalid", 400);
+      if (!validObjectId(id)) throw new AppError("Invalid id", 400);
 
       const message = await this.messageRepository.findById(id);
 
