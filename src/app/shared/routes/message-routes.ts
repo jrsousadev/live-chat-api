@@ -1,17 +1,27 @@
 import { Router } from "express";
 
-import createMessageController from "../../controllers/message/create-message-controller";
-import deleteAllMessagesController from "../../controllers/message/delete-all-messages-controller";
-import getAllMessagesByChatController from "../../controllers/message/get-all-messages-by-chat-controller";
-import getLastMessageByChatController from "../../controllers/message/get-last-message-by-chat-controller";
-import getMessageController from "../../controllers/message/get-message-controller";
+import { createMessageFactory } from "../../modules/message/create-message/create-message-factory";
+import { deleteAllMessagesFactory } from "../../modules/message/delete-all-messages/delete-all-messages-factory";
+import { getAllMessagesByChatFactory } from "../../modules/message/get-all-messages-by-chat/get-all-messages-by-chat-factory";
+import { getLastMessageByChatFactory } from "../../modules/message/get-last-message-by-chat/get-last-message-by-chat-factory";
+import { getMessageFactory } from "../../modules/message/get-message/get-message-factory";
 
 const messageRoutes = Router();
 
-messageRoutes.post("/", createMessageController.handle);
-messageRoutes.get("/chat/:chatId", getAllMessagesByChatController.handle);
-messageRoutes.get("/lastMessage/:chatId", getLastMessageByChatController.handle);
-messageRoutes.get("/:id", getMessageController.handle);
-messageRoutes.delete("/all", deleteAllMessagesController.handle);
+messageRoutes.post("/", (request, response, next) => {
+    createMessageFactory().handle(request, response, next)
+});
+messageRoutes.get("/chat/:chatId", (request, response, next) => {
+    getAllMessagesByChatFactory().handle(request, response, next)
+});
+messageRoutes.get("/lastMessage/:chatId", (request, response, next) => {
+    getLastMessageByChatFactory().handle(request, response, next)
+});
+messageRoutes.get("/:id", (request, response, next) => {
+    getMessageFactory().handle(request, response, next)
+});
+messageRoutes.delete("/all", (request, response, next) => {
+    deleteAllMessagesFactory().handle(request, response, next)
+});
 
 export default messageRoutes;
