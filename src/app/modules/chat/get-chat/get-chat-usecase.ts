@@ -10,9 +10,11 @@ export class GetChatUseCase {
 
   execute = async ({ id }: GetChatRequest) => {
     try {
-      if (!validObjectId(id)) throw new AppError("id invalid", 400);
+      const chat = await this.chatRepository.findById(id);
 
-      return await this.chatRepository.findById(id);
+      if (!chat) throw new AppError("Chat is not exist")
+
+      return chat;
     } catch (err) {
       throw err;
     }

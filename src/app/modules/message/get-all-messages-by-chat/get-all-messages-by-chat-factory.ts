@@ -2,15 +2,22 @@ import { InMemoryMessageRepository } from "../../../../../tests/_repositories/in
 import { MessageModule } from "../message-module";
 import { GetAllMessagesByChatController } from "./get-all-messages-by-chat-controller";
 import { GetAllMessagesByChatUseCase } from "./get-all-messages-by-chat-usecase";
+import { config } from "../../../../config";
+import { InMemoryChatRepository } from "../../../../../tests/_repositories/in-memory-chat-repository";
+import { ChatModule } from "../../chat/chat-module";
 
-const JEST_ENV = process.env.JEST as string;
+const TEST_ENVIRONMENT = config.ENVIRONMENT === "TEST" ? true : false;
 
 export const getAllMessagesByChatFactory = () => {
-  const messageRepository = JEST_ENV
+  const messageRepository = TEST_ENVIRONMENT
     ? new InMemoryMessageRepository()
     : new MessageModule();
+  const chatRepository = TEST_ENVIRONMENT
+    ? new InMemoryChatRepository()
+    : new ChatModule();
   const getAllMessagesByChat = new GetAllMessagesByChatUseCase(
-    messageRepository
+    chatRepository,
+    messageRepository,
   );
   const getAllMessagesByChatController = new GetAllMessagesByChatController(
     getAllMessagesByChat
