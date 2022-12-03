@@ -7,7 +7,7 @@ import { Message } from "../../src/domain/entities/message";
 import { User } from "../../src/domain/entities/user";
 import { GroupChat } from "../../src/domain/entities/group-chat";
 
-const seederBaseFolder = join(__dirname, "../", "database");
+const seederBaseFolder = join(__dirname, "../", "_database");
 
 const chats: Chat[] = [];
 const messages: Message[] = [];
@@ -19,7 +19,7 @@ const MESSAGES_AMOUNT = 4;
 
 for (let index = 0; index < USERS_AMOUNT; index++) {
   const user = User.create({
-    id: faker.datatype.uuid(),
+    id: faker.database.mongodbObjectId(),
     name: faker.name.fullName(),
     image: faker.image.avatar(),
   });
@@ -32,7 +32,7 @@ for (let index = 0; index < CHAT_AMOUNT; index++) {
   let idTwo = index + 1;
 
   const chat = Chat.create({
-    id: faker.datatype.uuid(),
+    id: faker.database.mongodbObjectId(),
     users: [users[idOne].id, users[idTwo].id],
   });
 
@@ -40,7 +40,7 @@ for (let index = 0; index < CHAT_AMOUNT; index++) {
 }
 
 const groupChat = GroupChat.create({
-  id: faker.datatype.uuid(),
+  id: faker.database.mongodbObjectId(),
   isGroup: true,
   users: [users[0].id, users[1].id, users[2].id, users[3].id],
   groupName: faker.name.jobTitle(),
@@ -51,7 +51,7 @@ for (let index = 0; index < MESSAGES_AMOUNT; index++) {
   let chatId = index > 2 ? 0 : index;
 
   const message = Message.create({
-    id: faker.datatype.uuid(),
+    id: faker.database.mongodbObjectId(),
     chatId: chats[chatId].id,
     issuer: users[index].id,
     text: faker.word.verb(),
