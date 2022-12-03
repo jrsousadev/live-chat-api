@@ -1,5 +1,6 @@
 import { serverHttp as app } from "../../../src/app/shared/app";
 import { fakeDBChat } from "../../_database";
+import { faker } from "@faker-js/faker";
 import request from "supertest";
 
 describe("Get Last Message By Chat", () => {
@@ -20,6 +21,16 @@ describe("Get Last Message By Chat", () => {
     expect(response.statusCode).toEqual(400);
     expect(JSON.parse(response.text)).toEqual(
       JSON.parse(`{"message": "Invalid id"}`)
+    );
+  });
+
+  it("should occur error if there is no chat and HTTP Status 400", async () => {
+    const id = faker.database.mongodbObjectId();
+    const response = await request(app).get(`/api/message/lastMessage/${id}`);
+
+    expect(response.statusCode).toEqual(400);
+    expect(JSON.parse(response.text)).toEqual(
+      JSON.parse(`{"message": "Chat is not exist"}`)
     );
   });
 });

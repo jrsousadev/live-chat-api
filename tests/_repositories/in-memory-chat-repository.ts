@@ -45,7 +45,6 @@ export class InMemoryChatRepository implements ChatRepository {
     return chat;
   }
 
-  // TODO
   async createGroup({
     groupImage,
     groupName,
@@ -68,8 +67,22 @@ export class InMemoryChatRepository implements ChatRepository {
     return groupChat;
   }
 
-  //TODO
-  findAllByUser(userId: string): Promise<Chat[] | null> {
-    throw new Error("Method not implemented.");
+  async findAllByUser(userId: string): Promise<Chat[] | null> {
+    let chats: Chat[] = [];
+
+    this.items.forEach((item) => {
+      item.users.some((user) => {
+        if (user === userId) {
+          const chat: Chat = {
+            id: item.id,
+            users: item.users,
+            createdAt: new Date(item.createdAt),
+          };
+          chats.push(chat);
+        }
+      });
+    });
+
+    return chats;
   }
 }
