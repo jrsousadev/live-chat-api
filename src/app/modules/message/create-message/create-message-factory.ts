@@ -6,19 +6,20 @@ import { UserModule } from "../../user/user-module";
 import { MessageModule } from "../message-module";
 import { CreateMessageController } from "./create-message-controller";
 import { CreateMessageUseCase } from "./create-message-usecase";
+import { config } from "../../../../config";
 
-const JEST_ENV = process.env.JEST as string;
+const TEST_ENVIRONMENT = config.ENVIRONMENT === "TEST" ? true : false;
 
 export const createMessageFactory = () => {
-  const messageRepository = JEST_ENV
+  const messageRepository = TEST_ENVIRONMENT
     ? new InMemoryMessageRepository()
     : new MessageModule();
 
-  const userRepository = JEST_ENV
+  const userRepository = TEST_ENVIRONMENT
     ? new InMemoryUserRepository()
     : new UserModule();
 
-  const chatRepository = JEST_ENV
+  const chatRepository = TEST_ENVIRONMENT
     ? new InMemoryChatRepository()
     : new ChatModule();
 
