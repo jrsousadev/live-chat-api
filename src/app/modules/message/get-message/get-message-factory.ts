@@ -1,13 +1,13 @@
 import { InMemoryMessageRepository } from "../../../../../tests/_repositories/in-memory-message-repository";
-import { MessageRepository } from "../../../repositories/message-repository";
 import { MessageModule } from "../message-module";
 import { GetMessageController } from "./get-message-controller";
 import { GetMessageUseCase } from "./get-message-usecase";
+import { config } from "../../../../config";
 
-const JEST_ENV = process.env.JEST as string;
+const TEST_ENVIRONMENT = config.ENVIRONMENT === "TEST" ? true : false;
 
 export const getMessageFactory = () => {
-  const messageRepository = JEST_ENV
+  const messageRepository = TEST_ENVIRONMENT
     ? new InMemoryMessageRepository()
     : new MessageModule();
   const getMessage = new GetMessageUseCase(messageRepository);
