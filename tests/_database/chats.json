@@ -1,39 +1,36 @@
 [
     {
-        "id": "e76cb7ca-e77d-49c9-8da8-b4f1328b933d",
+        "id": "a3281d82cbc904f470fabb9e",
         "users": [
-            "23ef8d4d-12ba-40e5-949f-3f53703834fd",
-            "38a4641d-9b08-4fe9-86a2-a364f8801f8b"
+            "ad2f7172a5d799648325b8fe",
+            "0f76d1be66c9483866dc3cad"
         ],
-        "createdAt": "2022-12-02T21:19:07.914Z"
+        "createdAt": "2022-12-03T04:29:33.463Z"
     },
     {
-        "id": "c1b62557-42a6-43f0-87ed-25a102112685",
+        "id": "15d2d3bcf3dfa176b2ccf20f",
         "users": [
-            "38a4641d-9b08-4fe9-86a2-a364f8801f8b",
-            "2388b4df-bbd8-45ff-8a09-ba89ac8e52aa"
+            "0f76d1be66c9483866dc3cad",
+            "d6befba805754a32695fcf1e"
         ],
-        "createdAt": "2022-12-02T21:19:07.914Z"
+        "createdAt": "2022-12-03T04:29:33.463Z"
     },
     {
-        "id": "e794cec3-5e65-4da1-bcf4-088ce3e41c91",
+        "id": "6ed6cb3b79eccacbef5e0add",
         "users": [
-            "2388b4df-bbd8-45ff-8a09-ba89ac8e52aa",
-            "15b98854-e921-4bea-8784-ce6cd820c140"
+            "d6befba805754a32695fcf1e",
+            "df5edddf3efc19bb72ee3f74"
         ],
-        "createdAt": "2022-12-02T21:19:07.914Z"
+        "createdAt": "2022-12-03T04:29:33.463Z"
     },
     {
-        "id": "5744710a-3e17-4407-a684-c99292e9899d",
+        "id": "ac2ad2cccb59eec3b12a0346",
         "users": [
-            "23ef8d4d-12ba-40e5-949f-3f53703834fd",
-            "38a4641d-9b08-4fe9-86a2-a364f8801f8b",
-            "2388b4df-bbd8-45ff-8a09-ba89ac8e52aa",
-            "15b98854-e921-4bea-8784-ce6cd820c140"
+            "ad2f7172a5d799648325b8fe",
+            "0f76d1be66c9483866dc3cad",
+            "d6befba805754a32695fcf1e",
+            "df5edddf3efc19bb72ee3f74"
         ],
-        "isGroup": "true",
-        "groupName": "group name",
-        "groupImage": "group image",
-        "createdAt": "2022-12-02T21:19:07.914Z"
+        "createdAt": "2022-12-03T04:29:33.463Z"
     }
 ]
