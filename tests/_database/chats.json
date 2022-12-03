@@ -1,0 +1,39 @@
+[
+    {
+        "id": "e76cb7ca-e77d-49c9-8da8-b4f1328b933d",
+        "users": [
+            "23ef8d4d-12ba-40e5-949f-3f53703834fd",
+            "38a4641d-9b08-4fe9-86a2-a364f8801f8b"
+        ],
+        "createdAt": "2022-12-02T21:19:07.914Z"
+    },
+    {
+        "id": "c1b62557-42a6-43f0-87ed-25a102112685",
+        "users": [
+            "38a4641d-9b08-4fe9-86a2-a364f8801f8b",
+            "2388b4df-bbd8-45ff-8a09-ba89ac8e52aa"
+        ],
+        "createdAt": "2022-12-02T21:19:07.914Z"
+    },
+    {
+        "id": "e794cec3-5e65-4da1-bcf4-088ce3e41c91",
+        "users": [
+            "2388b4df-bbd8-45ff-8a09-ba89ac8e52aa",
+            "15b98854-e921-4bea-8784-ce6cd820c140"
+        ],
+        "createdAt": "2022-12-02T21:19:07.914Z"
+    },
+    {
+        "id": "5744710a-3e17-4407-a684-c99292e9899d",
+        "users": [
+            "23ef8d4d-12ba-40e5-949f-3f53703834fd",
+            "38a4641d-9b08-4fe9-86a2-a364f8801f8b",
+            "2388b4df-bbd8-45ff-8a09-ba89ac8e52aa",
+            "15b98854-e921-4bea-8784-ce6cd820c140"
+        ],
+        "isGroup": "true",
+        "groupName": "group name",
+        "groupImage": "group image",
+        "createdAt": "2022-12-02T21:19:07.914Z"
+    }
+]
