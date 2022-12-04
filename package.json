@@ -5,11 +5,11 @@
   "repository": "https://github.com/jrsousadev/chat-realtime-api.git",
   "license": "MIT",
   "scripts": {
-    "start": "node dist/app/shared/server.js",
+    "start": "node dist/src/app/shared/server.js",
     "dev": "ts-node-dev src/app/shared/server.ts",
     "build": "tsc",
     "seed": "ts-node-dev tests/_seed/index.ts",
-    "test": "npm run seed && jest"
+    "test": "npm run seed && jest --coverage"
   },
   "dependencies": {
     "@prisma/client": "^4.6.1",
