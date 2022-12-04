@@ -35,4 +35,4 @@ WORKDIR /app
 ENV NODE_ENV production
 ENV PATH /root/.volta/bin:$PATH
 
-CMD [ "node", "dist/shared/server" ]
+CMD [ "node", "dist/src/app/shared/server" ]
